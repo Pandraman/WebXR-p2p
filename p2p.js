@@ -2,14 +2,25 @@
 // <script src="https://cdn.jsdelivr.net/npm/peerjs@1.3.2/dist/peerjs.min.js"></script>
 
 let playerId = Math.floor(Math.random() * 10).toString();
-let peer = new Peer(playerId);
+let peer = new Peer(playerId, {
+  config: {
+    'iceServers': [
+      { url: 'stun:stun.l.google.com:19302' },
+      {
+        url: 'turn:turn.anyfirewall.com:443?transport=tcp',
+        username: 'webrtc',
+        credential: 'webrtc'
+      }
+    ]
+  }
+});
 let conn;
 
 peer.on('open', (id) => {
   console.log('My peer ID is: ' + id);
-  console.log(id);
+  // alert('Your peer ID is: ' + id);
   // Connect to another player by entering their ID
-  let remoteId = prompt("ID: "+id+"     Enter opponent's Peer ID:");
+  let remoteId = prompt(id+"    Enter opponent's Peer ID:");
   if (remoteId) {
     conn = peer.connect(remoteId);
     setupConnectionEvents();
