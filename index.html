@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+    <script src="p2p.js"></script>
+  </head>
+  <body>
+    <a-scene fog="type: linear; color: #DEEFFF; far: 10; density: 0.8">
+			<a-entity id="localPlayer" camera look-controls wasd-controls position="0 1.6 0" sync-position></a-entity>
+      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow=""></a-box>
+      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow=""></a-sphere>
+      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow=""></a-cylinder>
+      <a-plane position="0 0 -4" rotation="-90 0 0" width="24" height="24" color="#7BC8A4" shadow=""></a-plane>
+      <a-sky color="#ECECEC"></a-sky>
+      <!-- Remote player entity -->
+      <a-cylinder id="remotePlayer" position="0 0 0" radius="0.5" height="1.5" color="#FFC65D" shadow=""></a-cylinder>
+    </a-scene>
+  </body>
+</html>
