@@ -1,19 +1,58 @@
-<html>
-  <head>
-    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
-    <script src="p2p.js"></script>
-  </head>
-  <body>
-    <a-scene fog="type: linear; color: #DEEFFF; far: 10; density: 0.8">
-			<a-entity id="localPlayer" camera look-controls wasd-controls position="0 1.6 0" sync-position></a-entity>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow=""></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow=""></a-sphere>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow=""></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="24" height="24" color="#7BC8A4" shadow=""></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
-      <!-- Remote player entity -->
-      <a-cylinder id="remotePlayer" position="0 0 0" radius="0.5" height="1.5" color="#FFC65D" shadow=""></a-cylinder>
-    </a-scene>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Your Site</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #frame-container {
+            margin-top: 20px;
+            display: none;
+        }
+        iframe {
+            width: 80%;
+            height: 600px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Enter IP Address to Load the Site</h1>
+    
+    <button onclick="showPrompt()">Enter IP</button>
+
+    <div id="frame-container">
+        <h2>Loading Site...</h2>
+        <iframe id="site-frame" src=""></iframe>
+    </div>
+
+    <script>
+        function showPrompt() {
+            // Ask user for the IP address
+            let ip = prompt("Please enter the IP address of the site (e.g., 192.168.1.100)");
+
+            // Validate the IP address format (optional)
+            if (ip && isValidIP(ip)) {
+                // Show the iframe and load the HTTP site
+                document.getElementById('frame-container').style.display = 'block';
+                document.getElementById('site-frame').src = "http://" + ip;
+            } else {
+                alert("Invalid IP address. Please try again.");
+            }
+        }
+
+        // Simple function to validate IP format (optional)
+        function isValidIP(ip) {
+            const regex = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+            return regex.test(ip);
+        }
+    </script>
+
+</body>
 </html>
